@@ -10,7 +10,7 @@ Step          | Command to run in terminal
 -----------------------|--------------------------------
 1.&nbsp;Install&nbsp;Apache           |  sudo apt install apache2 -y 
 2.&nbsp;Add&nbsp;Pi&nbsp;to&nbsp;Apache's&nbsp;usergroup&nbsp;for&nbsp;easier&nbsp;editing. | sudo usermod -a -G www-data pi
-3.&nbsp;Set&nbsp;user&nbsp;permissions&nbsp;(Although&nbsp;by&nbsp;default&nbsp;this&nbsp;should&nbsp;already&nbsp;be&nbsp;set) | sudo chown -R -f www-data:www-data /var/www/html data type.
+3.&nbsp;Set&nbsp;user&nbsp;permissions&nbsp;(If&nbsp;needed) | sudo chown -R -f www-data:www-data /var/www/html data type.
 4.&nbsp;Give&nbsp;execution&nbsp;permissions | sudo chmod -R 777 /var/www/
 5.&nbsp;Install&nbsp;php | sudo apt install php7.3 libapache2-mod-php7.3 php7.3-mbstring php7.3-mysql php7.3-curl php7.3-gd php7.3-zip -y
 6.&nbsp;Restart&nbsp;Apache&nbsp;if&nbsp;needed | service apache2 restart
