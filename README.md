@@ -8,7 +8,7 @@ Instructions to set up the Raspberry Pi server after the default OS has been loa
 
 Step &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;            | Command
 -----------------------|--------------------------------
-1.Install Apache           |  sudo apt install apache2 -y 
+1.&nbsp;Install&nbsp;Apache           |  sudo apt install apache2 -y 
 02 | A simple example showing how to do static and dynamic linking for C++.  (Not so important)
 03 | An example on how to dynamically link compiled C++/GPU code to python via ctypes.  Explains how to do pass numpy array pointers, numbers to the C/GPU functions with the proper data type.
 04 | An example on how to flatten, pass and then reshape numpy arrays into a compiled DLL for processing and also shows an example of using the 3D grid in CUDA.  The example assumes the numpy array created in python is Fortran ordering, i.e. matrix indicies are such matrix[x][y][z] not matrix[z][y][x] (C ordering).
