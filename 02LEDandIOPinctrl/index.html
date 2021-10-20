@@ -24,6 +24,12 @@
     <table style="width:50%">
 
         <tr>
+            <td>Tim's</td>
+            <td>Website</td>
+            <td>In Japan</td>
+        </tr>
+
+        <tr>
             <td>PHP counter</td>
             <td>Calls python increment 1 every s</td>
             <td>
@@ -41,8 +47,32 @@
         </tr>
 
         <tr>
-            <td><button onclick="ControlREDLED()">Click to increment 2</button></td>
-            <td>Click to toggleRED</td>
+            <td><button onclick="ControlREDLED()">RED</button></td>
+            <td>Click to toggle RED</td>
+            <td>
+                <div id="redstatus"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td><button onclick="ControlGREENLED()">GREEN</button></td>
+            <td>Click to toggle GREEN</td>
+            <td>
+                <div id="greenstatus"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td><button onclick="ControlBLUELED()">BLUE</button></td>
+            <td>Click to toggle BLUE</td>
+            <td>
+                <div id="bluestatus"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Button on Breadboard</td>
+            <td></td>
             <td>
                 <div id="button"></div>
             </td>
@@ -62,7 +92,10 @@
 
         document.getElementById('txt').innerHTML = 0;
         document.getElementById('clock').innerHTML = "----";
-        document.getElementById('button').innerHTML = 0;
+        document.getElementById('redstatus').innerHTML = "OFF";
+        document.getElementById('greenstatus').innerHTML = "OFF";
+        document.getElementById('bluestatus').innerHTML = "OFF";
+        document.getElementById('button').innerHTML = "OFF";
 
         function checkTime(i) {
             if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
@@ -72,7 +105,7 @@
 
 
         increment = 0
-        buttoninc = 0
+        statusout = "0001"
 
         function ControlREDLED() {
 
@@ -80,9 +113,27 @@
                 type: "POST",
                 url: '/RED.php',
 
-                success: function (outdata, outtext) {
+                success: function (outdata, outtext) { }
+            }
+            );
+        }
+        function ControlGREENLED() {
 
-                }
+            jQuery.ajax({
+                type: "POST",
+                url: '/GREEN.php',
+
+                success: function (outdata, outtext) { }
+            }
+            );
+        }
+        function ControlBLUELED() {
+
+            jQuery.ajax({
+                type: "POST",
+                url: '/BLUE.php',
+
+                success: function (outdata, outtext) { }
             }
             );
         }
@@ -90,7 +141,31 @@
         function doPHP() {
 
             document.getElementById('txt').innerHTML = increment;     //Set the html element box = to aaaa
-            document.getElementById('button').innerHTML = buttoninc;  //Constantly refresh button increment
+
+            if (statusout.split('')[0] == "0") {
+                document.getElementById('redstatus').innerHTML = "OFF";
+            } else {
+                document.getElementById('redstatus').innerHTML = "ON";
+            }
+
+            if (statusout.split('')[1] == "0") {
+                document.getElementById('greenstatus').innerHTML = "OFF";
+            } else {
+                document.getElementById('greenstatus').innerHTML = "ON";
+            }
+
+            if (statusout.split('')[2] == "0") {
+                document.getElementById('bluestatus').innerHTML = "OFF";
+            } else {
+                document.getElementById('bluestatus').innerHTML = "ON";
+            }
+
+            if (statusout.split('')[3] == "0") {
+                document.getElementById('button').innerHTML = "PRESSED";
+            } else {
+                document.getElementById('button').innerHTML = "OPEN";
+            }
+
 
             /*jQuery will call the php script on the server side and run the python that adds two numbers together.
             Two arguments are passed, first is the starting number, and the second is the increment
@@ -107,28 +182,20 @@
                 }
             }
             );
-            /* For reference, the source code for the php and python is below and exist as math.php and pythonadd.py in the same directory as index.html
 
-            math.php
-            <?php
+            jQuery.ajax({
+                type: "POST",
+                url: '/CheckStatus.php',
 
-                $args1 = $_REQUEST['arg1'];
-                $args2 = $_REQUEST['arg2'];
-                $sum = exec("python pythonadd.py $args1 $args2");
-                echo $sum;
 
-            ?>
+                success: function (outdata, outtext) {
+                    statusout = outdata;
 
-            pythonadd.py
-            import sys
+                }
+            }
+            );
 
-            def main():
-                print(int(sys.argv[1]) + int(sys.argv[2]))
-                    
-            if __name__ == '__main__':
-                main()
 
-            */
 
             const today = new Date();
             let h = today.getHours();
