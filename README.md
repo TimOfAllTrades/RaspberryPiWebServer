@@ -14,6 +14,8 @@ Step          | Command to run in terminal
 4.&nbsp;Give&nbsp;execution&nbsp;permissions | sudo chmod -R 777 /var/www/
 5.&nbsp;Install&nbsp;php | sudo apt install php7.3 libapache2-mod-php7.3 php7.3-mbstring php7.3-mysql php7.3-curl php7.3-gd php7.3-zip -y
 6.&nbsp;Restart&nbsp;Apache&nbsp;if&nbsp;needed | service apache2 restart
+7.&nbsp;Set&nbsp;GPIOmem&nbsp;owner&nbsp;to&nbsp;www-data | sudo chown www-data /dev/gpiomem
+
 
 Project          | Purpose
 -----------------------|--------------------------------
