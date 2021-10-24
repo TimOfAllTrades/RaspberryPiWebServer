@@ -85,8 +85,6 @@
 
     <script>
 
-        //normal way
-
         document.getElementById('txt').innerHTML = 0;
         document.getElementById('clock').innerHTML = "----";
         document.getElementById('redstatus').innerHTML = "OFF";
@@ -137,7 +135,7 @@
 
         function doPHP() {
 
-            document.getElementById('txt').innerHTML = increment;     //Set the html element box = to aaaa
+            document.getElementById('txt').innerHTML = increment;
 
             if (statusout.split('')[0] == "0") {
                 document.getElementById('redstatus').innerHTML = "OFF";
@@ -179,6 +177,34 @@
                 }
             }
             );
+
+            /*
+            ========
+            Math.php
+            ========
+
+            <?php
+    
+                $args1 = $_REQUEST['arg1'];
+                $args2 = $_REQUEST['arg2'];
+                $sum = exec("python pythonadd.py $args1 $args2");
+                echo $sum;
+                    
+            ?>
+
+            ============
+            pythonadd.py
+            ============
+
+            import sys
+
+            def main():
+                print(int(sys.argv[1]) + int(sys.argv[2]))
+
+            if __name__ == '__main__':
+                main()
+
+            */
 
             jQuery.ajax({
                 type: "POST",
