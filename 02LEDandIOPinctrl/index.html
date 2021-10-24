@@ -94,6 +94,7 @@
 
         increment = 0
         statusout = "0001"
+        statusnow = "0001"
 
         function checkTime(i) {
             if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
@@ -101,7 +102,7 @@
         }
 
         function ControlREDLED() {
-
+            document.getElementById('redstatus').innerHTML = "---";
             jQuery.ajax({
                 type: "POST",
                 url: '/RED.php',
@@ -111,7 +112,7 @@
             );
         }
         function ControlGREENLED() {
-
+            document.getElementById('greenstatus').innerHTML = "---";
             jQuery.ajax({
                 type: "POST",
                 url: '/GREEN.php',
@@ -121,7 +122,7 @@
             );
         }
         function ControlBLUELED() {
-
+            document.getElementById('bluestatus').innerHTML = "---";
             jQuery.ajax({
                 type: "POST",
                 url: '/BLUE.php',
@@ -134,31 +135,41 @@
         function doPHP() {
 
             document.getElementById('txt').innerHTML = increment;
-
-            if (statusout.split('')[0] == "0") {
-                document.getElementById('redstatus').innerHTML = "OFF";
-            } else {
-                document.getElementById('redstatus').innerHTML = "ON";
+            if (statusnow.split('')[0] != statusout.split('')[0]) {
+                if (statusout.split('')[0] == "0") {
+                    document.getElementById('redstatus').innerHTML = "OFF";
+                } else {
+                    document.getElementById('redstatus').innerHTML = "ON";
+                }
+                statusnow = statusout.split('')[0] + statusnow.split('')[1] + statusnow.split('')[2] + statusnow.split('')[3];
             }
 
-            if (statusout.split('')[1] == "0") {
-                document.getElementById('greenstatus').innerHTML = "OFF";
-            } else {
-                document.getElementById('greenstatus').innerHTML = "ON";
+            if (statusnow.split('')[1] != statusout.split('')[1]) {
+                if (statusout.split('')[1] == "0") {
+                    document.getElementById('greenstatus').innerHTML = "OFF";
+                } else {
+                    document.getElementById('greenstatus').innerHTML = "ON";
+                }
+                statusnow = statusnow.split('')[0] + statusout.split('')[1] + statusnow.split('')[2] + statusnow.split('')[3];
             }
 
-            if (statusout.split('')[2] == "0") {
-                document.getElementById('bluestatus').innerHTML = "OFF";
-            } else {
-                document.getElementById('bluestatus').innerHTML = "ON";
+            if (statusnow.split('')[2] != statusout.split('')[2]) {
+                if (statusout.split('')[2] == "0") {
+                    document.getElementById('bluestatus').innerHTML = "OFF";
+                } else {
+                    document.getElementById('bluestatus').innerHTML = "ON";
+                }
+                statusnow = statusnow.split('')[0] + statusnow.split('')[1] + statusout.split('')[2] + statusnow.split('')[3];
             }
+            if (statusnow.split('')[3] != statusout.split('')[3]) {
+                if (statusout.split('')[3] == "0") {
+                    document.getElementById('button').innerHTML = "PRESSED";
+                } else {
+                    document.getElementById('button').innerHTML = "OPEN";
+                }
+                statusnow = statusnow.split('')[0] + statusnow.split('')[1] + statusnow.split('')[2] + statusout.split('')[3]
 
-            if (statusout.split('')[3] == "0") {
-                document.getElementById('button').innerHTML = "PRESSED";
-            } else {
-                document.getElementById('button').innerHTML = "OPEN";
             }
-
 
             /*jQuery will call the php script on the server side and run the python that adds two numbers together.
             Two arguments are passed, first is the starting number, and the second is the increment
