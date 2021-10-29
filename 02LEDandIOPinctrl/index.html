@@ -39,8 +39,16 @@
         </tr>
 
         <tr>
+            <td>A PHP server clock</td>
+            <td>The time on my server is:</td>
+            <td>
+                <div id="phpclock"></div>
+            </td>
+        </tr>
+
+        <tr>
             <td>A Java clock</td>
-            <td>The time is:</td>
+            <td>The time on your device is:</td>
             <td>
                 <div id="clock"></div>
             </td>
@@ -87,12 +95,14 @@
 
         document.getElementById('txt').innerHTML = 0;
         document.getElementById('clock').innerHTML = "----";
+        document.getElementById('phpclock').innerHTML = "----";
         document.getElementById('redstatus').innerHTML = "OFF";
         document.getElementById('greenstatus').innerHTML = "OFF";
         document.getElementById('bluestatus').innerHTML = "OFF";
         document.getElementById('button').innerHTML = "OFF";
 
         increment = 0
+        phpout = ""
         statusout = "0001"
         statusnow = "0001"
 
@@ -133,7 +143,7 @@
         }
 
         function doPHP() {
-
+            document.getElementById('phpclock').innerHTML = phpout;
             document.getElementById('txt').innerHTML = increment;
             if (statusnow.split('')[0] != statusout.split('')[0]) {
                 if (statusout.split('')[0] == "0") {
@@ -222,6 +232,18 @@
 
                 success: function (outdata, outtext) {
                     statusout = outdata;
+
+                }
+            }
+            );
+
+            jQuery.ajax({
+                type: "POST",
+                url: '/phptime.php',
+
+
+                success: function (outdata, outtext) {
+                    phpout = outdata;
 
                 }
             }
