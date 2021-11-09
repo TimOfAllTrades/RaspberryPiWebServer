@@ -20,5 +20,7 @@ Step          | Command to run in terminal
 
 Project          | Purpose
 -----------------------|--------------------------------
-1.&nbsp;SimpleAjaxPhpPy&nbsp;           |  Contains the most basic functions of html, javascript, php and python.  In this webpage, a javascript is used to routinely call a php, which then runs a simply python addition script and then returns the python's console out.  There is also a button which can manually start call a php and python, although its output is synchronized with the 1 second refresh of the javascript.
+1.&nbsp;01SimpleAjaxPhpPy&nbsp;           |  Contains the most basic functions of html, javascript, php and python.  In this webpage, a javascript is used to routinely call a php, which then runs a simply python addition script and then returns the python's console out.  There is also a button which can manually start call a php and python, although its output is synchronized with the 1 second refresh of the javascript.
 2.&nbsp;02LEDandIOPinctrl&nbsp;           |  Contains a script to communicate with the GPIO pins on the raspberry pi by controlling the LED on off state and reading the button pressed state.
+3.&nbsp;03MotionWebserver | Contains a snippet to turn a USB camera into a webcam
+4.&nbsp;04SerialIN | Contains code to begin the serial stream from an arduino UNO and read it on raspberry pi. 
