@@ -16,6 +16,7 @@ Step          | Command to run in terminal
 6.&nbsp;Restart&nbsp;Apache&nbsp;if&nbsp;needed | service apache2 restart
 7.&nbsp;Set&nbsp;GPIOmem&nbsp;owner&nbsp;to&nbsp;www-data | sudo chown www-data /dev/gpiomem
 8.&nbsp;Get&nbsp;video&nbsp;streaming&nbsp;software&nbsp;| sudo apt-get install motion It may be necessary to do 'sudo apt-get update' first
+9.&nbsp;Set&nbsp;ttys0&nbsp;owner&nbsp;to&nbsp;www-data | sudo chown www-data /dev/ttyS0
 
 
 Project          | Purpose
