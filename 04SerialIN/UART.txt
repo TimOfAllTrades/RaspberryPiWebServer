@@ -1,0 +1,5 @@
+ttys0 -> pin 14
+ttyAMA0 -> pin 15
+
+1.) Disable serial login
+2.) enable uart = 1 in /boot/config.txt 
