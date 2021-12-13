@@ -107,13 +107,13 @@
         document.getElementById('greenstatus').innerHTML = "OFF";
         document.getElementById('bluestatus').innerHTML = "OFF";
         document.getElementById('button').innerHTML = "OFF";
-        document.getElementById('Serialout').innerHTML = "0";
+        document.getElementById('Serialout').innerHTML = 0;
 
         increment = 0
         phpout = ""
         statusout = "0001"
         statusnow = "0001"
-        Serialout = ""
+        Seriout = ""
 
         function checkTime(i) {
             if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
@@ -154,7 +154,7 @@
         function doPHP() {
             document.getElementById('phpclock').innerHTML = phpout;
             document.getElementById('txt').innerHTML = increment;
-            document.getElementById('Serialout').innerHTML = Serialout;
+            document.getElementById('Serialout').innerHTML = Seriout;
 
             if (statusnow.split('')[0] != statusout.split('')[0]) {
                 if (statusout.split('')[0] == "0") {
@@ -266,7 +266,7 @@
 
 
                 success: function (outdata, outtext) {
-                    Serialout = outdata;
+                    Seriout = outdata;
 
                 }
             }

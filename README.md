@@ -19,6 +19,7 @@ Step          | Command to run in terminal
 9.&nbsp;Set&nbsp;ttys0&nbsp;owner&nbsp;to&nbsp;www-data | sudo chown www-data /dev/ttyS0
 
 
+
 Project          | Purpose
 -----------------------|--------------------------------
 1.&nbsp;01SimpleAjaxPhpPy&nbsp;           |  Contains the most basic functions of html, javascript, php and python.  In this webpage, a javascript is used to routinely call a php, which then runs a simply python addition script and then returns the python's console out.  There is also a button which can manually start call a php and python, although its output is synchronized with the 1 second refresh of the javascript.
