@@ -1,0 +1,73 @@
+#If necessary
+sudo apt-get update
+sudo apt-get upgrade
+
+#The software
+sudo apt-get install hostapd
+sudo apt-get install dnsmasq
+
+#To stop each of those services
+sudo systemctl stop hostapd
+sudo systemctl stop dnsmasq
+
+#Add the lines to the dhcpcd.conf file in etc/dhcpcd.conf
+
+#Remove the existing etc/dnsmasq.conf and replace it with the one in this repo
+
+#Another config file to create and replace with the one in this repo this contains the wifi settings, SSID etc
+sudo nano /etc/hostapd/hostapd.conf
+
+#Now to link the host apd file using the hostapd config file
+sudo nano /etc/default/hostapd
+#Uncomment the line below
+#DAEMON_CONF="/etc/hostapd/hostapd.conf"
+
+#next set up traffic forwarding
+sudo nano /etc/sysctl.conf
+#Uncomment the line below
+#net.ipv4.ip_forward=1
+
+#Set up ip tables rule
+sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
+
+
+==========================
+
+
+Step 7: Add a new iptables rule
+Next, we’re going to add IP masquerading for outbound traffic on eth0 using iptables:
+
+sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+…and save the new iptables rule:
+
+sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
+To load the rule on boot, we need to edit the file /etc/rc.local and add the following
+line just above the line exit 0:
+
+iptables-restore < /etc/iptables.ipv4.nat
+
+Step 8: Enable internet connection
+Now the Raspberry Pi is acting as an access point to which other devices can connect. However, those devices can’t use the Pi to access the internet just yet. To make the possible, we need to build a bridge that will pass all traffic between the wlan0 and eth0 interfaces.
+
+To build the bridge, let’s install one more package:
+
+sudo apt-get install bridge-utils
+We’re ready to add a new bridge (called br0):
+
+sudo brctl addbr br0
+Next, we’ll connect the eth0 interface to our bridge:
+
+sudo brctl addif br0 eth0
+Finally, let’s edit the interfaces file:
+
+sudo nano /etc/network/interfaces
+…and add the following lines at the end of the file:
+
+auto br0
+iface br0 inet manual
+bridge_ports eth0 wlan0
+Step 9: Reboot
+Now that we’re ready, let’s reboot with sudo reboot.
+
+Now your Pi should be working as a wireless access point. Try it out by hopping on another device and looking for the network name you used back in step 5.
