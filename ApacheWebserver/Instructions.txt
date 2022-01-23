@@ -1,0 +1,22 @@
+From a blank Raspberry Pi
+
+-Install apache2
+
+sudo apt install apache2 -y
+
+-Set permissions to allow pi to edit var/www
+
+sudo usermod -a -G www-data pi
+
+-Set folder user permissions, it may be better to use the default var/www/html directory since that has www-data permissions set already.
+sudo chown -R -f www-data:www-data /var/www/html
+
+-Set execution permissions
+sudo chmod -R 777 [directory here]
+
+-install php 
+sudo apt install php7.3 libapache2-mod-php7.3 php7.3-mbstring php7.3-mysql php7.3-curl php7.3-gd php7.3-zip -y
+
+-restart apache2
+service apache2 restart
+

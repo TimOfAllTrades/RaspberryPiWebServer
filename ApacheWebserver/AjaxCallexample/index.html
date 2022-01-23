@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tim's Page</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+        let outtext = "";
+    </script>
+
+
+</head>
+
+<body>
+    <h1>Hello World</h1>
+    <table style="width:50%">
+
+        <tr>
+            <td>PHP counter</td>
+            <td>Calls python increment 1 every s</td>
+            <td>
+                <div id="txt"></div>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>A Java clock</td>
+            <td>The time is:</td>
+            <td>
+                <div id="clock"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Tim's</td>
+            <td>Website</td>
+            <td>In Japans</td>
+        </tr>
+    </table>
+
+
+    <script>
+
+        //normal way
+
+        document.getElementById('txt').innerHTML = 0;
+        document.getElementById('clock').innerHTML = "----";
+
+        function checkTime(i) {
+            if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+            return i;
+        }
+
+
+
+        aaa = 0
+        function doPHP() {
+
+            document.getElementById('txt').innerHTML = aaa;     //Set the html element box = to aaaa
+
+            /*jQuery will call the php script on the server side and run the python that adds two numbers together.
+            Two arguments are passed, first is the starting number, and the second is the increment
+            aaa will be set to the console output of the python script which should just be a single number.*/
+            jQuery.ajax({
+                type: "POST",
+                url: '/math.php',
+                dataType: 'json',
+                data: { arg1: aaa, arg2: 1 },
+
+                success: function (outdata, outtext) {
+                    aaa = outdata;
+
+                }
+            }
+            );
+            /* For reference, the source code for the php and python is below and exist as math.php and pythonadd.py in the same directory as index.html
+
+            math.php
+            <?php
+
+                $args1 = $_REQUEST['arg1'];
+                $args2 = $_REQUEST['arg2'];
+                $sum = exec("python pythonadd.py $args1 $args2");
+                echo $sum;
+
+            ?>
+
+            pythonadd.py
+            import sys
+
+            def main():
+                print(int(sys.argv[1]) + int(sys.argv[2]))
+                    
+            if __name__ == '__main__':
+                main()
+
+            */
+
+            const today = new Date();
+            let h = today.getHours();
+            let m = today.getMinutes();
+            let s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById('clock').innerHTML = h + ":" + m + ":" + s;
+
+        }
+
+        setInterval(doPHP, 1000);
+
+
+        let name = "hellop";
+        console.log(name);
+    </script>
+
+
+
+
+</body>
+
+</html>

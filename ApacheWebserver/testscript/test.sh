@@ -1,0 +1,2 @@
+python Hellotext.py
+echo $?

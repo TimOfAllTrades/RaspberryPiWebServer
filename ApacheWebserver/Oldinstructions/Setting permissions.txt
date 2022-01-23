@@ -1,0 +1,6 @@
+have Raspbian os and trying to run GPIO commands from a PHP file. Unfortunately the shell_exec is not able to execute any command! 99% I am sure it is a permission issue! I search in Google and read many articles and none of them worked for me. So I install a fresh copy of Raspbian + Apache + PHP. I ran following command:
+
+sudo chown -R www-data:www-data /var/www
+and then I ran sudo visudo and added the following line:
+
+www-data ALL=NOPASSWD: ALL

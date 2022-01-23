@@ -1,0 +1,7 @@
+#Start Apache
+
+sudo systemctl start apache2
+
+#Stop Apache
+
+sudo systemctl stop apache2

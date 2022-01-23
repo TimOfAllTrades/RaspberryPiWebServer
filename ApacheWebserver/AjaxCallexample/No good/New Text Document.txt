@@ -1,0 +1,2 @@
+https://stackoverflow.com/questions/5052543/how-to-fire-ajax-request-periodically
+https://stackoverflow.com/questions/30955509/call-php-periodically-with-ajax
